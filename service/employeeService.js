@@ -226,33 +226,5 @@ const getDesignationTitle = async (designationId) => {
   const designation = await Designation.findOne({ designationId }).select("title");
   return designation ? designation.title : null;
 };
-const reactivateEmployee = async (empId) => {
-  const employee = await Employee.findOne({ empId });
-  if (!employee) return { success: false, message: "Employee not found" };
 
-  if (employee.status === "active") return { success: false, message: "Already active" };
-
-  employee.status = "active";
-  await employee.save();
-  return { success: true, message: "Reactivated successfully" };
-};
-
-const deactivateEmployee = async (empId) => {
-  const employee = await Employee.findOne({ empId });
-  if (!employee) return { success: false, message: "Employee not found" };
-
-  if (employee.status === "inactive") return { success: false, message: "Already inactive" };
-
-  employee.status = "inactive";
-  await employee.save();
-  return { success: true, message: "Deactivated successfully" };
-};
-
-module.exports = {
-  // ...others
-  reactivateEmployee,
-  deactivateEmployee
-};
-
-
-module.exports = { getDepartmentName, getDesignationTitle,getEmployeeById,createEmployee,getAllEmployees,updateEmployee,reactivateEmployee,deactivateEmployee};
+module.exports = { getDepartmentName, getDesignationTitle,getEmployeeById,createEmployee,getAllEmployees,updateEmployee};
